@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>LiPAD - LiDAR Portal for Archiving and Distribution</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+	<meta name="abstract" content="LiPAD serves as the primary data access and distribution center of the Phil-LiDAR Programs" />
+	<meta name="description" content="LiPAD serves as the primary data access and distribution center of the Phil-LiDAR 1 and Phil-LiDAR 2 Programs, a Department of Science and Technology initiative that engages the University of the Philippines and fifteen (15) Higher Education Institutions (HEIs) throughout the country, with the aim t..." />
+	<meta name="keywords" content="lidar ph, remote sensing ph, ph lidar, lidar philippines, dem ph, dem philippines, dsm ph, dsm philippines, dtm philippines, dtm ph,las philippines,las ph,lidar data philippines, phil-lidar program, phil-lidar, phil-lidar 1, phil-lidar 2, parmap, coastmap, hydrological dataset, hydrological dataset ph, hydrological datasets ph, hydrological data philippines, dream program, dream philippines, dream lidar, dream phil lidar, dream phil-lidar" />
+	<meta name="author" content="DAD - UP DREAM / PHIL-LiDAR 1 Program" />
+	<meta name="copyright" content="DOST-UP DREAM and Phil-LiDAR Program. All Rights Reserved." />
+	<meta name="contact" content="lipad@dream.upd.edu.ph">
+	<meta name="application-name" content="LiPAD - LiDAR Portal for Archiving and Distribution" />
+	<!-- for Facebook -->
+	<meta property="og:title" content="LiPAD - LiDAR Portal for Archiving and Distribution" />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="" />
+	<!--<meta property="og:url" content="" />-->
+	<meta property="og:description" content="LiPAD serves as the primary data access and distribution center of the Phil-LiDAR 1 and Phil-LiDAR 2 Programs, a Department of Science and Technology initiative that engages the University of the Philippines and fifteen (15) Higher Education Institutions (HEIs) throughout the country, with the aim t..." />
+
+	<!-- for Twitter -->
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:title" content="Welcome! - LiDAR Portal for Archiving and Distribution" />
+	<meta name="twitter:description" content="LiPAD serves as the primary data access and distribution center of the Phil-LiDAR 1 and Phil-LiDAR 2 Programs, a Department of Science and Technology initiative that engages the University of the Philippines and fifteen (15) Higher Education Institutions (HEIs) throughout the country, with the aim t..." />
+	<meta name="twitter:image" content="" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css">
+	<link rel="stylesheet" href="/static/leaflet-control-geocoder.css" />
+	<script src="/static/leaflet-control-geocoder.js"></script>
+	<script type="text/javascript" src="/static/lidar-coverage.js"></script>
+	<style>
+		body {font-family: 'Roboto', sans-serif}
+		.mySlides {display: none}
+		#menu {
+			z-index: 3;
+		}
+		#navMobile {
+			z-index: 3;
+		}
+.search-input {
+	font-family:Courier
+}
+.search-input,
+.leaflet-control-search {
+	max-width:400px;
+}
+
+	</style>
+</head>
+<body>
+	<!-- Navbar -->
+	<div id="menu" class="w3-cell-middle w3-top w3-blue w3-show w3-center">
+		<div class="w3-cell-middle w3-bar w3-opacity-off w3-blue">
+			<a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+			<a href="#home" class="w3-cell-middle w3-bar-item w3-button w3-padding-large">LiPAD HOME</a>
+			<a href="#requestdata" class="w3-cell-middle w3-bar-item w3-button w3-padding-large w3-hide-small">REQUEST LIDAR DATA</a>
+			<div class="w3-dropdown-hover w3-hide-small w3-cell-middle ">
+				<button class="w3-cell-middle w3-padding-large w3-button" title="Data Store">RESOURCE MAPS <i class="fa fa-caret-down"></i></button>     
+				<div class="w3-cell-middle w3-dropdown-content w3-bar-block w3-card-4">
+					<a href="https://lipad-fmc.dream.upd.edu.ph/layers/?limit=100&offset=0&keywords__slug__in=flood-hazard-map" class="w3-cell-middle w3-bar-item w3-button">Flood Hazard Maps</a>
+					<!--
+						<a href="https://parmap.dream.upd.edu.ph/" class="w3-cell-middle w3-bar-item w3-button">Agricultural Resource Maps</a>
+						<a href="https://coastmap.dream.upd.edu.ph/" class="w3-cell-middle w3-bar-item w3-button">Aquatic Resource Maps</a>
+						<a href="https://frexls.dream.upd.edu.ph/" class="w3-cell-middle w3-bar-item w3-button">Forest Resource Maps</a>
+						<a href="https://phd.dream.upd.edu.ph/" class="w3-cell-middle w3-bar-item w3-button">Hydrological Datasets</a>
+						<a href="https://remap.dream.upd.edu.ph/" class="w3-cell-middle w3-bar-item w3-button">Renewable Energy Resource Maps</a>
+						<a href="/#coming-soon" class="w3-cell-middle w3-bar-item w3-button">Syntethic Aperture Radar DEM</a>
+					-->
+					<a href="#requestdata" class="w3-cell-middle w3-bar-item w3-button">Agricultural Resource Maps</a>
+					<a href="#requestdata" class="w3-cell-middle w3-bar-item w3-button">Aquatic Resource Maps</a>
+					<a href="#requestdata" class="w3-cell-middle w3-bar-item w3-button">Forest Resource Maps</a>
+					<a href="#requestdata" class="w3-cell-middle w3-bar-item w3-button">Hydrological Datasets</a>
+					<a href="#requestdata" class="w3-cell-middle w3-bar-item w3-button">Renewable Energy Resource Maps</a>
+					<a href="#requestdata" class="w3-cell-middle w3-bar-item w3-button">Syntethic Aperture Radar DEM</a>
+				</div>
+			</div>
+			<a href="/shapefilegen.html" class="w3-cell-middle w3-bar-item w3-button w3-padding-large w3-hide-small">GENERATE SHAPEFILE</a>
+			<a href="/#contact" class="w3-cell-middle w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
+		</div>
+	</div>
+
+	<!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
+	<div id="navMobile" class="w3-blue w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+		<div class="w3-bar-block">
+			<a href="#requestdata" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">REQUEST LIDAR DATA </a>
+			<button class="w3-bar-item w3-button w3-padding-large" title="Data Store" onclick="myFunction()">RESOURCE MAPS <i class="fa fa-caret-down"></i></button>   
+			<a href="https://lipad-fmc.dream.upd.edu.ph/layers/?limit=100&offset=0&keywords__slug__in=flood-hazard-map" class="w3-padding-large w3-bar-item w3-button">Flood Hazard Maps</a>
+			<!--
+			<a href="https://parmap.dream.upd.edu.ph/" class="w3-padding-large w3-bar-item w3-button" onclick="myFunction()">Agricultural Resource Maps</a>
+			<a href="https://coastmap.dream.upd.edu.ph/" class="w3-padding-large w3-bar-item w3-button" onclick="myFunction()">Aquatic Resource Maps</a>
+			<a href="https://frexls.dream.upd.edu.ph/" class="w3-padding-large w3-bar-item w3-button" onclick="myFunction()">Forest Resource Maps</a>
+			<a href="https://phd.dream.upd.edu.ph/" class="w3-padding-large w3-bar-item w3-button" onclick="myFunction()">Hydrological Datasets</a>
+			<a href="https://remap.dream.upd.edu.ph/" class="w3-padding-large w3-bar-item w3-button" onclick="myFunction()">Renewable Energy Resource Maps</a>
+			<a href="#coming-soon" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Syntethic Aperture Radar DEM</a>
+			-->
+			<a href="#requestdata" class="w3-padding-large w3-bar-item w3-button" onclick="myFunction()">Agricultural Resource Maps</a>
+			<a href="#requestdata" class="w3-padding-large w3-bar-item w3-button" onclick="myFunction()">Aquatic Resource Maps</a>
+			<a href="#requestdata" class="w3-padding-large w3-bar-item w3-button" onclick="myFunction()">Forest Resource Maps</a>
+			<a href="#requestdata" class="w3-padding-large w3-bar-item w3-button" onclick="myFunction()">Hydrological Datasets</a>
+			<a href="#requestdata" class="w3-padding-large w3-bar-item w3-button" onclick="myFunction()">Renewable Energy Resource Maps</a>
+			<a href="#requestdata" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Syntethic Aperture Radar DEM</a>
+			<a href="/shapefilegen.html" class="w3-padding-large w3-bar-item w3-button" onclick="myFunction()">GENERATE SHAPEFILE</a>
+			<a href="#contact" class="w3-padding-large w3-bar-item w3-button" onclick="myFunction()">CONTACT</a>
+		</div>
+	</div>
+
+	<!-- Page content -->
+	<div class="w3-content" style="max-width:2000px;margin-top:46px">
+		<!-- <div class="w3-container w3-inline-block w3-content" style="max-width:1200px" id="home">
+			<span onclick="this.parentElement.style.display='none'" class="w3-button w3-display-topright w3-white">&times;</span>
+			<div class="w3-panel w3-mobile w3-row w3-blue">
+			   <h3>Announcement!</h3>
+			   <p> October 15, 2019 </p>
+				  <p>Due to a power issue in our server room, we will be shutting down our servers every 7pm daily for the next two weeks. We will try to power up our servers by 9am weekdays. During the power downs, our services might not be accessible. This also limits our ability to process your data requests. Processing of data requests may take more time since we won't be able to just leave our processing units to prepare your data requests. Please bear with us as we have our electrical systems inspected and repaired. Thank you for your understanding.</p>
+				</div> 			
+		</div> -->
+		<!-- Main section -->
+		<div class="w3-container w3-inline-block w3-content w3-padding" style="max-width:1200px" id="home">
+			<div class="w3-panel w3-mobile w3-half w3-center">
+				
+				<div class="w3-mobile w3-row">
+					<div class="w3-col w3-half">
+						<a href="https://lipad-fmc.dream.upd.edu.ph/layers/?limit=100&offset=0&keywords__slug__in=flood-hazard-map" class="w3-center w3-button w3-ripple w3-blue "><h1 class="w3-mobile w3-large">Download Flood Hazard Maps</h1></a>
+					</div>
+					<div class="w3-col w3-half">
+						<a href="https://phillidar-dad.github.io/taal-open-lidar.html" class="w3-center w3-button w3-ripple w3-blue "><h1 class="w3-mobile w3-large">Access Taal Open LiDAR Data</h1></a>
+					</div>
+					<hr>
+				</div>
+				<div class="w3-container w3-mobile w3-left-align">
+					<p class="w3-center">
+						<img src="/static/DREAM.png" class="w3-center" style="width:120px" style="max-height:80px">
+						<img src="/static/DREAM2.png" class="w3-center" style="width:120px" style="max-height:80px">
+					</p>
+
+					<h2 class="w3-mobile w3-xlarge"> Welcome to LiPAD!</h2>
+					<h3 class="w3-mobile w3-large"> LiDAR Portal for Archiving and Distribution </h3>
+					<p class="w3-mobile w3-medium w3-justify">  LiPAD serves as the primary data access and distribution center of the Phil-LiDAR 1 and Phil-LiDAR 2 Programs, a Department of Science and Technology initiative that engages the University of the Philippines and fifteen (15) Higher Education Institutions (HEIs) throughout the country, with the aim to produce detailed flood hazard and resource maps using LiDAR technology. </p>
+					<p class="w3-mobile w3-medium w3-justify">
+						The datasets, which include Digital Elevation Models (DEMs), Digital Terrain Models (DTMs), Orthophotos, Classified LAZ, Flood Hazard Maps and Resource Maps, are available for download in open and GIS-ready formats, for use by Local Government Units (LGUs), National Government Agencies (NGAs), members of the academe, and researchers, among others.
+					</p>
+				</div>
+			</div>
+			<div class="w3-display-container w3-cell w3-mobile w3-half ">
+				<style>
+					/* Map */
+					#map {
+						min-height: 90vh;
+						z-index:1;
+					}
+					/* Map */
+					#map-canvas {
+						min-height: 400px;
+						max-width: 100%;
+						z-index:1;
+					}
+				</style> 
+				<div id="map">
+				</div>
+			</div>
+		</div>
+
+
+
+		<!-- Request Data Section -->
+		<div class="w3-blue"> 
+			<div class="w3-container w3-content w3-padding-64" style="max-width:1200px" id="requestdata">
+				<div class="w3-center">
+					<h2 class="w3-wide">REQUEST LiDAR DATA</h2>
+					<p class="w3-opacity"><i>How to request LiDAR Data</i></p>
+				</div>
+				<h3>Flood Hazard Maps</h3>
+				<p>Flood Hazard Maps are still available at the <a href="https://lipad-fmc.dream.upd.edu.ph/layers/?limit=100&offset=0&keywords__slug__in=flood-hazard-map">LiPAD FMC website</a>, without registration. Please proceed to the FMC sub-website if you are interested on downloading Flood Hazard Maps. </p>
+				<hr>
+				<h3>Resource Maps</h3>
+				<!--<p>Resource Maps are available on their respective portals produced by the components of the PHIL-LiDAR 2 Program. Please see the RESOURCE MAPS menu above if you are interested on obtaining resource maps.</p> !-->
+				<p>Resource Maps produced by the components of the PHIL-LiDAR 2 Program are also available for request through the Manual Data Requests form below.</p>
+				<hr>
+				<h3>Manual Data Requests</h3>
+
+				<p class="w3-left-align"> Since the LiPAD Portal is under maintenance, may we request all data requests be coursed through the following Google Forms:</p>
+
+				<a href="https://forms.gle/Ti43fGj6yWfCwSfFA" class="w3-center w3-button w3-ripple w3-indigo"><h1 class="w3-mobile w3-large">LiDAR Data Requester Registration Form</h1></a>
+				<p> The LiDAR Data Requester Form is for everyone who is requesting existing LiDAR Data as seen in the coverage map above. Every data requester is required to fill up this form in order to request data using the Data Request Form. <i>Existing data requesters who have requested via e-mail prior to June 20, 2019 must fill up this form for new data requests.</i></p>
+
+				<a href="https://forms.gle/LqaWWV6nnYcqKqvs8" class="w3-center w3-button w3-ripple w3-indigo"><h1 class="w3-mobile w3-large">LiDAR Data Request Form</h1></a>
+				<p> The LiDAR Data Request form is for everyone who is requesting existing LiDAR Data and has filled up the LiDAR Data Requester Registration Form.</p>
+
+				<p>Please note that there are still documents that are required to be submitted via e-mail after filling up both forms above.</p>
+				<ol>
+					<li>Formal Letter of request</li>
+					<li>Area of Interest Shapefile</li>
+					<li>Proof of consultancy for those consulting in behalf of another organization</li>
+				</ol>
+
+				<p>If you want to obtain data for private or commercial use, new data for areas not covered by the existing LiDAR Coverage, or a large amount of LiDAR Data (e.g Whole Country) , please contact our Business Development Officer at <a href="mailto:bdo@dream.upd.edu.ph">bdo[at]dream.upd.edu.ph</a></p>
+
+			</div>
+		</div>
+		
+		<!-- The Contact Section -->
+		<div class="w3-container w3-content w3-padding-32" style="max-width:1200px;" id="contact">
+			<h2 class="w3-wide w3-center">CONTACT US</h2>
+			<p class="w3-opacity w3-center"><i>Visit or mail us.</i></p>
+			<div class="w3-row">
+				<div class="w3-col w3-large w3-margin-bottom w3-third">
+					<div class="w3-row">
+						<div class="w3-col s1 m1 l1"><i class="fa fa-map-marker" style="width:30px"></i></div>
+						<div class="w3-col s11 m11 l11">Department of Geodetic Engineering & TCAGP 218 Vila Wing, Melchor Hall, College of Engineering University of the Philippines Osmeña Avenue, Diliman, Quezon City 1101</div><br />
+					</div>
+					<div class="w3-row">
+						<div class="w3-col s1 m1 l1"><i class="fa fa-phone" style="width:30px"></i></div>
+						<div class="w3-col s11 m11 l11">Phone: +63-2-9818500 local 3124 / +63-3-920-8924</div><br />
+					</div>
+					<div class="w3-row">
+						<div class="w3-col s1 m1 l1"><i class="fa fa-envelope" style="width:30px"></i></div>
+						<div class="w3-col s11 m11 l11"> Email: <a href="mailto:lipad@dream.upd.edu.ph">lipad@dream.upd.edu.ph</a></div><br />
+					</div>
+				</div>
+				<div class="w3-col w3-twothird">
+					<div id="map-canvas"></div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<footer class="w3-container w3-center w3-light-grey">
+		<style>
+			.logo {
+				width: 90px;
+				height: 90px;
+			}
+		</style>
+		<div class="w3-container w3-content w3-center w3-padding w3-row" style="max-width:1200px" id="logos">
+			<div class="w3-padding w3-col w3-quarter w3-center">
+				<img src="/static/UP.png" class="w3-center logo">
+				<p class="w3-small w3-cell-bottom">University of the Philippines</p>
+			</div>
+			<div class="w3-padding w3-col w3-quarter w3-center">
+				<img src="/static/DOST.png" class="w3-center logo">
+				<p class="w3-small w3-cell-bottom">Department of Science and Technology</p>
+			</div>
+			<div class="w3-padding w3-col w3-quarter w3-center">
+				<img src="/static/dost_pcieerd.png" class="w3-center logo">
+				<p class="w3-small w3-cell-bottom">Philippine Council for Industry, Energy, and Emerging
+					Technology Research and Development<br />(DOST-PCIEERD)</p>
+			</div>
+			<div class="w3-padding w3-col w3-quarter w3-center">
+				<img src="/static/TCAGP.png" class="w3-center logo">
+				<p class="w3-small w3-cell-bottom">Training Center for Applied Geodesy and Photogrammetry<br />(UP TCAGP)</p>
+			</div>
+		</div>
+		<div class="w3-container w3-content w3-center w3-row w3-padding">
+			<div class="w3-padding w3-col w3-half w3-center">
+				<img src="/static/DREAM.png" class="w3-center logo">
+				<p class="w3-small w3-cell-bottom">Disaster Risk and Exposure Assessment for Mitigation (DREAM) Program <br /> Nationwide Hazard Mapping of the Philippines Using LiDAR (PHIL-LiDAR 1) Program </p>
+			</div>
+			<div class="w3-padding w3-col w3-half w3-center">
+				<img src="/static/DREAM2.png" class="w3-center logo">
+				<p class="w3-small w3-cell-bottom">Nationwide Detailed Resources Assessment Using LiDAR (PHIL-LiDAR 2) Program </p>
+			</div>
+		</div>
+		<p class="w3-medium">©2019 DOST-UP DREAM and Phil-LiDAR Program. All Rights Reserved.</p>
+	</footer>
+
+		<script>
+		// Used to toggle the menu on small screens when clicking on the menu button
+		function myFunction() {
+			var x = document.getElementById("navMobile");
+			if (x.className.indexOf("w3-show") == -1) {
+				x.className += " w3-show";
+			} else { 
+				x.className = x.className.replace(" w3-show", "");
+			}
+		}
+		</script>
+
+</body>
+</html>
